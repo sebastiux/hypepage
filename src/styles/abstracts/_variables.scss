@@ -1,3 +1,4 @@
+// src/styles/abstracts/_variables.scss
 // Primary Colors
 $black: #000000;
 $white: #FFFFFF;
@@ -20,9 +21,8 @@ $colors: (
   'huge': #FAEEE1       // Linen
 );
 
-// Typography
+// Typography - Only Visby
 $font-primary: 'VisbyCF', sans-serif;
-$font-secondary: 'Gilroy', sans-serif;
 
 // Font Weights - Visby
 $visby-weights: (
@@ -44,6 +44,10 @@ $spacing: (
   'xl': 5rem,
   'xxl': 8rem
 );
+
+// Container
+$container-max-width: 1440px;
+$container-padding: 2rem;
 
 // Breakpoints
 $breakpoints: (

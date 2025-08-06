@@ -1,0 +1,52 @@
+// src/styles/index.scss
+@import './abstracts/variables';
+@import './abstracts/mixins';
+@import './abstracts/fonts';
+
+// Reset and base styles
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; // 1rem = 10px
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-primary;
+  font-weight: map-get($visby-weights, 'regular');
+  font-size: 1.6rem;
+  line-height: 1.6;
+  color: $black;
+  background-color: $white;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Container
+.container {
+  @include container;
+}
+
+// Remove default styles
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

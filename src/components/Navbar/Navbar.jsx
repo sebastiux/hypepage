@@ -1,6 +1,8 @@
+// src/components/Navbar/Navbar.jsx
 import React, { useState, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { useLanguage } from '../../contexts/LanguageContext';
+import { hgroupNegro } from '../../assets/images/logo';
 import './Navbar.scss';
 
 const Navbar = () => {
@@ -31,7 +33,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="navbar__container container">
         <div className="navbar__logo" onClick={handleLogoClick}>
-          <span className="navbar__logo-text">HGROUP</span>
+          <img src={hgroupNegro} alt="H Group" />
         </div>
         
         <ul className={`navbar__menu ${isMobileMenuOpen ? 'navbar__menu--open' : ''}`}>
