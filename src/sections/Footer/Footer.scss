@@ -1,0 +1,324 @@
+// src/sections/Footer/Footer.scss
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.footer {
+  padding: 10rem 0 6rem;
+  background-color: $white;
+  position: relative;
+  overflow: hidden;
+
+  // Subtle top border
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba($chrome-white, 0.5) 20%,
+      rgba($chrome-white, 0.5) 80%,
+      transparent
+    );
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+
+    @include responsive(tablet) {
+      grid-template-columns: 1fr;
+      gap: 6rem;
+    }
+  }
+
+  &__left {
+    padding-right: 4rem;
+
+    @include responsive(tablet) {
+      padding-right: 0;
+      order: 2;
+    }
+  }
+
+  &__title {
+    font-family: $font-primary;
+    font-size: clamp(3.5rem, 5vw, 5rem);
+    font-weight: map-get($visby-weights, 'regular');
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: $black;
+  }
+
+  &__subtitle {
+    font-family: $font-primary;
+    font-size: clamp(2rem, 3vw, 2.8rem);
+    font-weight: map-get($visby-weights, 'regular');
+    margin-bottom: 4rem;
+    color: $black;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  &__form-group {
+    position: relative;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: 1.8rem 0;
+    border: none;
+    border-bottom: 2px solid $chrome-white;
+    background: transparent;
+    font-family: $font-primary;
+    font-size: 1.6rem;
+    color: $black;
+    transition: all $transition-base;
+
+    &::placeholder {
+      color: $masala;
+      opacity: 0.7;
+      font-weight: map-get($visby-weights, 'light');
+    }
+
+    &:focus {
+      outline: none;
+      border-bottom-color: $black;
+      
+      &::placeholder {
+        opacity: 0.4;
+      }
+    }
+
+    // Error state
+    &--error {
+      border-bottom-color: #ff4444;
+    }
+  }
+
+  &__textarea {
+    resize: none;
+    min-height: 120px;
+    font-family: inherit;
+  }
+
+  &__error {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    font-size: 1.2rem;
+    color: #ff4444;
+    font-family: $font-primary;
+  }
+
+  &__submit {
+    align-self: flex-start;
+    padding: 1.8rem 4rem;
+    border: 2px solid $black;
+    border-radius: 50px;
+    background: transparent;
+    font-family: $font-primary;
+    font-size: 1.6rem;
+    font-weight: map-get($visby-weights, 'demi-bold');
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: $black;
+    cursor: pointer;
+    transition: all $transition-base;
+    margin-top: 2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background-color: $black;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    span {
+      position: relative;
+      z-index: 1;
+    }
+
+    &-icon {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:hover {
+      color: $white;
+
+      &::before {
+        width: 400px;
+        height: 400px;
+      }
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  &__right {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center; // Center align items
+
+    @include responsive(tablet) {
+      order: 1;
+    }
+  }
+
+  // Circular map container
+  &__map-container {
+    width: 350px;
+    height: 350px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border: 3px solid rgba($chrome-white, 0.5);
+    transition: all $transition-base;
+
+    &:hover {
+      transform: scale(1.02);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    @include responsive(tablet) {
+      width: 400px;
+      height: 400px;
+    }
+
+    @include responsive(mobile) {
+      width: 300px;
+      height: 300px;
+    }
+  }
+
+  &__map {
+    width: 100%;
+    height: 100%;
+    filter: grayscale(100%);
+    transition: filter $transition-base;
+
+    &:hover {
+      filter: grayscale(0%);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      // Scale the iframe to ensure full coverage of the circle
+      transform: scale(1.4);
+    }
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  &__logo {
+    width: 150px;
+    
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__address {
+    background: none;
+    border: none;
+    font-family: $font-primary;
+    font-size: 1.4rem;
+    line-height: 1.8;
+    color: $masala;
+    cursor: pointer;
+    transition: color $transition-base;
+    padding: 0;
+
+    &:hover {
+      color: $black;
+    }
+  }
+
+  &__social {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1rem;
+
+    a {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid $chrome-white;
+      border-radius: 50%;
+      transition: all $transition-base;
+
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: $black;
+        transition: fill $transition-base;
+      }
+
+      &:hover {
+        border-color: $black;
+        transform: translateY(-3px);
+      }
+    }
+  }
+
+  @include responsive(mobile) {
+    padding: 8rem 0 4rem;
+
+    &__content {
+      padding: 0 2rem;
+    }
+
+    &__title {
+      font-size: clamp(3rem, 4vw, 4rem);
+    }
+
+    &__subtitle {
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+    }
+
+    &__submit {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

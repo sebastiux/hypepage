@@ -20,6 +20,10 @@ import lamborghiniLogoNegro from './Lamborghini_logo negro.png';
 import mgLogo from './MG_Logo.png';
 import omodaLogo from './Omoda logo.png';
 import steveMaddenLogoNegro from './SteveMadden_Logo_negro.png';
+import yvesRocherBlanco from './Yves Rocher_Logo_Blanco.png';
+import yvesRocherNegro from './Yves Rocher-Logo_Negro.png';
+import zeekrBlanco from './Zeekr_Logo_Blanco.png';
+import zeekrNegro from './Zeekr_Logo_Negro.png';
 
 
 // Export all logos individually
@@ -41,5 +45,9 @@ export {
   lamborghiniLogoNegro,
   mgLogo,
   omodaLogo,
-  steveMaddenLogoNegro
+  steveMaddenLogoNegro,
+  yvesRocherBlanco,
+  yvesRocherNegro,
+  zeekrBlanco,
+  zeekrNegro
 };

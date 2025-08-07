@@ -1,0 +1,136 @@
+// src/sections/Servicios/Servicios.scss
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.servicios {
+  padding: 10rem 0;
+  background-color: $white;
+
+  &__header {
+    text-align: center;
+    margin-bottom: 8rem;
+  }
+
+  &__subtitle {
+    font-family: $font-primary;
+    font-size: 1.8rem;
+    font-weight: map-get($visby-weights, 'regular');
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 3rem;
+    color: $black;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+  }
+
+  &__title {
+    font-family: $font-primary;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: map-get($visby-weights, 'regular');
+    letter-spacing: 0.15em;
+    margin-bottom: 4rem;
+    color: $black;
+    padding: 1.5rem 4rem;
+    border: 2px solid $black;
+    border-radius: 50px;
+    display: inline-block;
+    text-transform: uppercase;
+  }
+
+  &__line {
+    width: 100%;
+    max-width: 1400px;
+    height: 3px;
+    background-color: map-get($colors, 'halo');
+    margin: 0 auto;
+    transform-origin: center;
+  }
+
+  &__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 8rem;
+  }
+
+  &__row {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 4rem;
+
+    &--first {
+      // First row with 5 items
+    }
+
+    &--second {
+      // Second row with 4 items - needs extra spacing to center
+      max-width: 80%; // This helps center the 4 items
+      margin: 0 auto;
+    }
+
+    @include responsive(tablet) {
+      flex-wrap: wrap;
+      gap: 3rem;
+      
+      &--second {
+        max-width: 100%;
+      }
+    }
+
+    @include responsive(mobile) {
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+    }
+  }
+
+  &__service {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 0 0 auto;
+    width: 180px;
+
+    @include responsive(tablet) {
+      width: 150px;
+    }
+
+    @include responsive(mobile) {
+      width: 200px;
+    }
+  }
+
+  &__icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__icon {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%); // Makes all icons pure black
+    opacity: 0.9;
+  }
+
+  &__service-title {
+    font-family: $font-primary;
+    font-size: 1.4rem;
+    font-weight: map-get($visby-weights, 'regular');
+    color: $black;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.2;
+    text-align: center;
+  }
+}

@@ -1,0 +1,364 @@
+// src/components/ProjectModal/ProjectModal.scss
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.project-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 9999;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  opacity: 0;
+
+  &__content {
+    background-color: $white;
+    max-width: 1200px;
+    width: 100%;
+    height: 85vh;
+    max-height: 700px;
+    position: relative;
+    overflow: hidden;
+    transform: scale(0.9);
+    opacity: 0;
+    border-radius: $radius-md;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  }
+
+  &__close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 40px;
+    height: 40px;
+    background: rgba($white, 0.9);
+    border: none;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 3rem;
+    font-family: $font-primary;
+    color: $black;
+    transition: all $transition-base;
+    border-radius: 50%;
+    @include flex-center;
+    line-height: 1;
+
+    &:hover {
+      transform: rotate(90deg);
+      background: $white;
+    }
+  }
+
+  &__container {
+    display: grid;
+    grid-template-columns: 65% 35%;
+    height: 100%;
+
+    @include responsive(tablet) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 60% 40%;
+    }
+  }
+
+  &__left {
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color $transition-base;
+    overflow: hidden;
+
+    @include responsive(tablet) {
+      padding: 1.5rem;
+    }
+
+    @include responsive(mobile) {
+      padding: 1rem;
+    }
+  }
+
+  &__images {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    // Patrones para diferentes cantidades de imágenes
+    &.pattern-single {
+      .project-modal__row {
+        height: 100%;
+      }
+    }
+
+    &.pattern-duo {
+      .project-modal__row {
+        height: 100%;
+        gap: 0.5rem;
+      }
+    }
+
+    &.pattern-trio {
+      .project-modal__row {
+        height: 100%;
+        gap: 0.5rem;
+      }
+    }
+
+    &.pattern-quad {
+      .project-modal__row {
+        height: calc(50% - 0.25rem);
+      }
+    }
+
+    &.pattern-penta {
+      .project-modal__row {
+        &:first-child {
+          height: 40%;
+        }
+        &:last-child {
+          height: calc(60% - 0.5rem);
+        }
+      }
+    }
+
+    &.pattern-hexa {
+      .project-modal__row {
+        height: calc(50% - 0.25rem);
+      }
+    }
+
+    &.pattern-septa {
+      .project-modal__row {
+        &:first-child {
+          height: 55%;
+        }
+        &:last-child {
+          height: calc(45% - 0.5rem);
+        }
+      }
+    }
+
+    &.pattern-octa {
+      .project-modal__row {
+        height: calc(33.333% - 0.333rem);
+      }
+    }
+  }
+
+  &__row {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+
+    &[data-images="1"] {
+      .project-modal__image-wrapper {
+        width: 100%;
+      }
+    }
+
+    &[data-images="2"] {
+      .project-modal__image-wrapper {
+        width: calc(50% - 0.25rem);
+      }
+    }
+
+    &[data-images="3"] {
+      .project-modal__image-wrapper {
+        width: calc(33.333% - 0.333rem);
+      }
+    }
+
+    &[data-images="4"] {
+      .project-modal__image-wrapper {
+        width: calc(25% - 0.375rem);
+      }
+    }
+  }
+
+  &__image-wrapper {
+    height: 100%;
+    overflow: hidden;
+    background-color: rgba($white, 0.1);
+    position: relative;
+    border-radius: $radius-sm;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform $transition-slow;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__right {
+    background-color: $white;
+    padding: 4rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    @include responsive(tablet) {
+      padding: 3rem 2rem;
+    }
+
+    @include responsive(mobile) {
+      padding: 2rem 1.5rem;
+    }
+  }
+
+  &__info {
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+  }
+
+  &__logo {
+    margin-bottom: 3rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__company-logo {
+    max-height: 120px;
+    width: auto;
+    max-width: 80%;
+    object-fit: contain;
+    filter: brightness(0) saturate(100%); // Hace el logo negro
+    
+    @include responsive(tablet) {
+      max-height: 100px;
+    }
+    
+    @include responsive(mobile) {
+      max-height: 80px;
+    }
+  }
+
+  &__description {
+    font-family: $font-primary;
+    font-size: 1.8rem;
+    line-height: 1.8;
+    color: $masala;
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+
+    p {
+      margin: 0;
+      font-weight: map-get($visby-weights, 'regular');
+    }
+
+    @include responsive(tablet) {
+      font-size: 1.6rem;
+      line-height: 1.7;
+    }
+
+    @include responsive(mobile) {
+      font-size: 1.5rem;
+      line-height: 1.6;
+    }
+  }
+
+  // Responsive
+  @include responsive(tablet) {
+    &__content {
+      height: 90vh;
+      max-height: none;
+    }
+
+    &__close {
+      top: 1.5rem;
+      right: 1.5rem;
+    }
+
+    &__images {
+      // Ajustes para tablet
+      &.pattern-penta,
+      &.pattern-septa {
+        .project-modal__row {
+          height: calc(50% - 0.25rem) !important;
+        }
+      }
+
+      &.pattern-octa {
+        .project-modal__row {
+          height: calc(33.333% - 0.333rem) !important;
+        }
+      }
+    }
+  }
+
+  @include responsive(mobile) {
+    padding: 1rem;
+
+    &__content {
+      height: 95vh;
+    }
+
+    &__close {
+      top: 1rem;
+      right: 1rem;
+      width: 35px;
+      height: 35px;
+      font-size: 2.5rem;
+    }
+
+    &__images {
+      gap: 0.25rem;
+
+      .project-modal__row {
+        &[data-images="3"],
+        &[data-images="4"] {
+          flex-wrap: wrap;
+          
+          .project-modal__image-wrapper {
+            width: calc(50% - 0.125rem);
+            height: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Animaciones
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.project-modal__image-wrapper {
+  animation: fadeInScale 0.5s ease-out forwards;
+  
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) {
+      animation-delay: #{$i * 0.05}s;
+    }
+  }
+}
