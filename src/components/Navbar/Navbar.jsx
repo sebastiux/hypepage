@@ -1,13 +1,11 @@
 // src/components/Navbar/Navbar.jsx
 import React, { useState, useEffect } from 'react';
 import { gsap } from 'gsap';
-import { useLanguage } from '../../contexts/LanguageContext';
 import { hgroupNegro } from '../../assets/images/logo';
 import './Navbar.scss';
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { t, language, toggleLanguage } = useLanguage();
 
   useEffect(() => {
     // GSAP animation for navbar appearance
@@ -38,28 +36,23 @@ const Navbar = () => {
         
         <ul className={`navbar__menu ${isMobileMenuOpen ? 'navbar__menu--open' : ''}`}>
           <li className="navbar__menu-item">
-            <a onClick={() => scrollToSection('servicios')}>{t('nav.servicios')}</a>
+            <a onClick={() => scrollToSection('servicios')}>SERVICIOS</a>
           </li>
           <li className="navbar__menu-item">
-            <a onClick={() => scrollToSection('proyectos')}>{t('nav.proyectos')}</a>
+            <a onClick={() => scrollToSection('plataformas')}>PLATAFORMAS</a>
           </li>
           <li className="navbar__menu-item">
-            <a onClick={() => scrollToSection('colaboraciones')}>{t('nav.colaboraciones')}</a>
+            <a onClick={() => scrollToSection('proyectos')}>PROYECTOS</a>
           </li>
           <li className="navbar__menu-item">
-            <a onClick={() => scrollToSection('contacto')}>{t('nav.contacto')}</a>
+            <a onClick={() => scrollToSection('colaboraciones')}>COLABORACIONES</a>
+          </li>
+          <li className="navbar__menu-item">
+            <a onClick={() => scrollToSection('contacto')}>CONTACTO</a>
           </li>
         </ul>
 
         <div className="navbar__actions">
-          <button 
-            className="navbar__lang-toggle"
-            onClick={toggleLanguage}
-            aria-label="Toggle language"
-          >
-            {language === 'es' ? 'EN' : 'ES'}
-          </button>
-          
           <button 
             className={`navbar__hamburger ${isMobileMenuOpen ? 'navbar__hamburger--open' : ''}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

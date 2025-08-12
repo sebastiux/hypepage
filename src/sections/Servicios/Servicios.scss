@@ -43,16 +43,15 @@
     width: 100%;
     max-width: 1400px;
     height: 3px;
-    background-color: map-get($colors, 'halo');
+    background-color: map-get($colors, 'hype'); // Usando el color de HYPE
     margin: 0 auto;
     transform-origin: center;
   }
 
   &__grid {
     display: flex;
-    flex-direction: column;
-    gap: 5rem;
-    max-width: 1200px;
+    justify-content: center;
+    max-width: 900px;
     margin: 0 auto;
     margin-top: 8rem;
   }
@@ -61,31 +60,17 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 4rem;
-
-    &--first {
-      // First row with 5 items
-    }
-
-    &--second {
-      // Second row with 4 items - needs extra spacing to center
-      max-width: 80%; // This helps center the 4 items
-      margin: 0 auto;
-    }
+    gap: 8rem; // Más espacio entre los 3 servicios
+    width: 100%;
 
     @include responsive(tablet) {
-      flex-wrap: wrap;
-      gap: 3rem;
-      
-      &--second {
-        max-width: 100%;
-      }
+      gap: 5rem;
     }
 
     @include responsive(mobile) {
       flex-direction: column;
       align-items: center;
-      gap: 2.5rem;
+      gap: 4rem;
     }
   }
 
@@ -95,42 +80,49 @@
     flex-direction: column;
     align-items: center;
     flex: 0 0 auto;
-    width: 180px;
+    width: 200px;
 
     @include responsive(tablet) {
-      width: 150px;
+      width: 180px;
     }
 
     @include responsive(mobile) {
-      width: 200px;
+      width: 220px;
     }
   }
 
   &__icon-wrapper {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 1.5rem;
+    width: 100px;
+    height: 100px;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   &__icon {
-    width: 60px;
-    height: 60px;
+    width: 80px;
+    height: 80px;
     object-fit: contain;
-    filter: brightness(0) saturate(100%); // Makes all icons pure black
+    filter: brightness(0) saturate(100%); // Hace los iconos negro puro
     opacity: 0.9;
+    transition: all $transition-base;
+
+    .servicios__service:hover & {
+      transform: scale(1.1);
+      opacity: 1;
+    }
   }
 
   &__service-title {
     font-family: $font-primary;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     font-weight: map-get($visby-weights, 'regular');
     color: $black;
     letter-spacing: 0.05em;
     text-transform: uppercase;
-    line-height: 1.2;
+    line-height: 1.3;
     text-align: center;
+    max-width: 180px;
   }
 }

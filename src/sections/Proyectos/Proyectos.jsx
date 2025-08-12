@@ -4,29 +4,15 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ProjectModal from '../../components/ProjectModal';
 import {
-  astonMartinLogoBlanco,
-  lamborghiniLogoBlanco,
-  yvesRocherBlanco
+  maxMaraLogoBlanco
 } from '../../assets/images/logo';
 import {
-  astonMartinHALO1,
-  astonMartinHALO2,
-  astonMartinHALO3,
-  astonMartinHALO4,
-  astonMartinHALO5,
-  astonMartinHALO6,
-  astonMartinPortadaHALO,
-  lamborghiniHALO1,
-  lamborghiniHALO2,
-  lamborghiniHALO3,
-  lamborghiniHALO4,
-  lamborghiniHALO5,
-  lamborghiniHALO6,
-  lamborghiniPortadaHALO,
-  yvesRocherHALO1,
-  yvesRocherHALO2,
-  yvesRocherHALO3,
-  yvesRocherHALO4
+  maxMaraHYPE1,
+  maxMaraHYPE2,
+  maxMaraHYPE3,
+  maxMaraHYPE4,
+  maxMaraHYPE5,
+  maxMaraPortadaHYPE
 } from '../../assets/images/projects';
 import './Proyectos.scss';
 
@@ -41,51 +27,21 @@ const Proyectos = () => {
 
   const projects = [
     {
-      id: 'aston-martin',
-      name: 'Aston Martin',
-      logo: astonMartinLogoBlanco,
-      image: astonMartinPortadaHALO,
+      id: 'maxmara',
+      name: 'MaxMara',
+      logo: maxMaraLogoBlanco,
+      image: maxMaraPortadaHYPE,
       galleryImages: [
-        astonMartinHALO1,
-        astonMartinHALO2,
-        astonMartinHALO3,
-        astonMartinHALO4,
-        astonMartinHALO5,
-        astonMartinHALO6
+        maxMaraHYPE1,
+        maxMaraHYPE2,
+        maxMaraHYPE3,
+        maxMaraHYPE4,
+        maxMaraHYPE5
       ],
-      description: 'Colaboramos con Aston Martin en la creación de contenido audiovisual exclusivo para el lanzamiento de sus modelos de lujo, capturando la esencia británica y la elegancia atemporal de la marca.',
-      brandColor: '#003E2F'
-    },
-    {
-      id: 'lamborghini',
-      name: 'Lamborghini',
-      logo: lamborghiniLogoBlanco,
-      image: lamborghiniPortadaHALO,
-      galleryImages: [
-        lamborghiniHALO1,
-        lamborghiniHALO2,
-        lamborghiniHALO3,
-        lamborghiniHALO4,
-        lamborghiniHALO5,
-        lamborghiniHALO6
-      ],
-      description: 'Contenido audiovisual de ultra lujo para Lamborghini, capturando la exclusividad, el diseño italiano y la experiencia única de conducir estos súper deportivos.',
-      brandColor: '#000000'
-    },
-    {
-      id: 'yves-rocher',
-      name: 'Yves Rocher',
-      logo: yvesRocherBlanco,
-      image: yvesRocherHALO1,
-      galleryImages: [
-        yvesRocherHALO1,
-        yvesRocherHALO2,
-        yvesRocherHALO3,
-        yvesRocherHALO4
-      ],
-      description: 'Producción de contenido natural y fresco para Yves Rocher, comunicando los valores de belleza botánica y sustentabilidad de la marca francesa.',
-      brandColor: '#7FB539'
+      description: 'Estrategia de relaciones públicas para el lanzamiento de la nueva colección MaxMara, conectando con influencers y medios especializados en moda de lujo.',
+      brandColor: '#8B0000'
     }
+    // Aquí se agregarán más proyectos cuando tengas las imágenes
   ];
 
   useEffect(() => {

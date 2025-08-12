@@ -1,53 +1,63 @@
 // src/assets/images/logo/index.js
-// Simple individual imports and exports
 
-// Import all logos
-import astonMartinLogoBlanco from './Aston Martin_Logo_Blanco.png';
-import astonMartinLogoNegro from './Aston martin_logo_negro.png';
-import commandoLogo from './Commando_Logo.png';
-import cybexLogo from './Cybex_Logo.png';
-import dodgeLogo from './Dodge_Logo.png';
-import donJulioLogo from './Don Julio_Logo.png';
-import fordLogo from './Ford.png';
-import haloLogoBlanco from './HALO_logo blanco.png';
-import haloLogoNegro from './HALOlogo_negro (1).png';
+// Logos principales de H Group y HYPE
 import hgroupNegro from './Hgroup_negro.png';
-import highLifeLogo from './HighLife_ logo.png';
-import honorLogoNegro from './Honor_Logo_Negro.png';
-import kavakLogo from './Kavak logo.png';
-import lamborghiniLogoBlanco from './Lamborghini Logo_Blanco.png';
-import lamborghiniLogoNegro from './Lamborghini_logo negro.png';
-import mgLogo from './MG_Logo.png';
-import omodaLogo from './Omoda logo.png';
-import steveMaddenLogoNegro from './SteveMadden_Logo_negro.png';
-import yvesRocherBlanco from './Yves Rocher_Logo_Blanco.png';
-import yvesRocherNegro from './Yves Rocher-Logo_Negro.png';
-import zeekrBlanco from './Zeekr_Logo_Blanco.png';
-import zeekrNegro from './Zeekr_Logo_Negro.png';
+import hypeLogoMain from './HYPE5.png';
+import hypeLogoNegro from './HYPElogo_negro (1).png';
+import logoPlataformasHYPE from './LogoPlataformasHYPE.png';
+import hypeLogoBlanco from './HYPElogo_blanco.png';
 
+// Logos de marcas colaboradoras - Versiones en blanco
+import chireyLogoBlanco from './ChireylogoBlanco (1).png';
+import huaweiLogoBlanco from './HuaweiLogoBlanco.png';
+import majaLogoBlanco from './MajaLogoBlanco  (1).png';
+import malayerbaLogoBlanco from './MalayerbalogoBlanco (2).png';
+import maxMaraLogoBlanco from './MaxMaraLogoBlanco.png';
+import yvesRocherLogoBlanco from './Yves Rocher_Logo_Blanco (1).png';
+import zeekrLogoBlanco from './Zeekr_Logo_Blanco (1).png';
 
-// Export all logos individually
+// Logos de marcas colaboradoras - Versiones en negro
+import chireyLogoNegro from './ChireylogoNegro (1).png';
+import dodgeLogo from './Dodge_Logo (1).png';
+import highLifeLogo from './High Life_ logo (2).png';
+import hongqiLogoNegro from './HongqilogoNegro (1).png';
+import huaweiLogoNegro from './HuaweiLogoNegro.png';
+import itamLogoNegro from './ItamlogoNegro (1).png';
+import majaLogoNegro from './MajaLogoNegro (1).png';
+import malayerbaLogoNegro from './MalayerbalogoNEGRO (2).png';
+import maseratiLogoNegro from './MaseratiLogoNegro.png';
+import maxMaraLogoNegro from './MaxMaraLogoNegro.png';
+import yvesRocherLogoNegro from './Yves Rocher-Logo_Negro (2).png';
+import zeekrLogoNegro from './Zeekr_Logo_Negro (1).png';
+
+// Exportar todos los logos organizados
 export {
-  astonMartinLogoBlanco,
-  astonMartinLogoNegro,
-  commandoLogo,
-  cybexLogo,
-  dodgeLogo,
-  donJulioLogo,
-  fordLogo,
-  haloLogoBlanco,
-  haloLogoNegro,
+  // Logos principales
   hgroupNegro,
+  hypeLogoMain,
+  hypeLogoNegro,
+  logoPlataformasHYPE,
+  hypeLogoBlanco,
+  // Logos blancos (para fondos oscuros)
+  chireyLogoBlanco,
+  huaweiLogoBlanco,
+  majaLogoBlanco,
+  malayerbaLogoBlanco,
+  maxMaraLogoBlanco,
+  yvesRocherLogoBlanco,
+  zeekrLogoBlanco,
+  
+  // Logos negros/color (para fondos claros)
+  chireyLogoNegro,
+  dodgeLogo,
   highLifeLogo,
-  honorLogoNegro,
-  kavakLogo,
-  lamborghiniLogoBlanco,
-  lamborghiniLogoNegro,
-  mgLogo,
-  omodaLogo,
-  steveMaddenLogoNegro,
-  yvesRocherBlanco,
-  yvesRocherNegro,
-  zeekrBlanco,
-  zeekrNegro
+  hongqiLogoNegro,
+  huaweiLogoNegro,
+  itamLogoNegro,
+  majaLogoNegro,
+  malayerbaLogoNegro,
+  maseratiLogoNegro,
+  maxMaraLogoNegro,
+  yvesRocherLogoNegro,
+  zeekrLogoNegro
 };

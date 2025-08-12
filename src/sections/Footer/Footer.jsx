@@ -147,7 +147,7 @@ const Footer = () => {
     }
 
     // Create WhatsApp message
-    const message = `¡Hola H Group, me interesa colaborar con HALO!
+    const message = `¡Hola H Group, me interesa colaborar con HYPE!
 
 Me gustaría ponerme en contacto con ustedes.
 
@@ -159,7 +159,7 @@ Me gustaría ponerme en contacto con ustedes.
 💬 *Mensaje:*
 ${formData.message}
 
-_Enviado desde el formulario de contacto de HALO`;
+_Enviado desde el formulario de contacto de HYPE`;
 
     // Encode the message for URL
     const encodedMessage = encodeURIComponent(message);

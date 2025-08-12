@@ -2,73 +2,35 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useLanguage } from '../../contexts/LanguageContext';
 import {
-  iconAftermovies,
-  iconAnimacion,
-  iconBrandedContent,
-  iconContenidoRedes,
-  iconFooh,
-  iconShootings,
-  iconTestimoniales,
-  iconTvSeries,
-  iconVideoclips
+  iconEstrategiaConMedio,
+  iconBrandCollabs,
+  iconMediaTraining
 } from '../../assets/images/icons';
 import './Servicios.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Servicios = () => {
-  const { t } = useLanguage();
   const sectionRef = useRef(null);
   const titleRef = useRef(null);
   const servicesRef = useRef([]);
 
   const services = [
     {
-      id: 'branded-content',
-      icon: iconBrandedContent,
-      title: 'BRANDED CONTENT'
+      id: 'estrategia-medio',
+      icon: iconEstrategiaConMedio,
+      title: 'ESTRATEGIA CON MEDIO'
     },
     {
-      id: 'shootings',
-      icon: iconShootings,
-      title: 'SHOOTINGS FOTOGRÁFICO'
+      id: 'brand-collabs',
+      icon: iconBrandCollabs,
+      title: 'BRAND COLLABS'
     },
     {
-      id: 'contenido-redes',
-      icon: iconContenidoRedes,
-      title: 'CONTENIDO REDES SOCIALES'
-    },
-    {
-      id: 'aftermovies',
-      icon: iconAftermovies,
-      title: 'AFTERMOVIES'
-    },
-    {
-      id: 'videoclips',
-      icon: iconVideoclips,
-      title: 'VIDEOCLIPS'
-    },
-    {
-      id: 'tv-series',
-      icon: iconTvSeries,
-      title: 'MOVIES/TV SERIES'
-    },
-    {
-      id: 'testimoniales',
-      icon: iconTestimoniales,
-      title: 'TESTIMONIALES'
-    },
-    {
-      id: 'animacion',
-      icon: iconAnimacion,
-      title: 'ANIMACIÓN'
-    },
-    {
-      id: 'fooh',
-      icon: iconFooh,
-      title: 'CGI/FOOH'
+      id: 'media-training',
+      icon: iconMediaTraining,
+      title: 'MEDIA TRAINING'
     }
   ];
 
@@ -122,7 +84,7 @@ const Servicios = () => {
           opacity: 1,
           y: 0,
           duration: 0.6,
-          stagger: 0.1,
+          stagger: 0.15,
           ease: 'power3.out',
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -135,61 +97,41 @@ const Servicios = () => {
     return () => ctx.revert();
   }, []);
 
-return (
-  <section className="servicios" id="servicios" ref={sectionRef}>
-    <div className="container">
-      <div className="servicios__header">
-        <p className="servicios__subtitle">
-          NOS DEDICAMOS A CONTAR HISTORIAS A TRAVÉS DE LA PRODUCCIÓN Y EDICIÓN AUDIOVISUAL
-        </p>
-        <h2 className="servicios__title" ref={titleRef}>SERVICIOS</h2>
-        <div className="servicios__line"></div>
-      </div>
-
-      <div className="servicios__grid">
-        {/* First row - 5 items */}
-        <div className="servicios__row servicios__row--first">
-          {services.slice(0, 5).map((service, index) => (
-            <div
-              key={service.id}
-              ref={el => servicesRef.current[index] = el}
-              className="servicios__service"
-            >
-              <div className="servicios__icon-wrapper">
-                <img 
-                  src={service.icon} 
-                  alt={service.title} 
-                  className="servicios__icon"
-                />
-              </div>
-              <h3 className="servicios__service-title">{service.title}</h3>
-            </div>
-          ))}
+  return (
+    <section className="servicios" id="servicios" ref={sectionRef}>
+      <div className="container">
+        <div className="servicios__header">
+          <p className="servicios__subtitle">
+            NOS DEDICAMOS A CREAR ESTRATEGIAS DE RELACIONES PÚBLICAS,
+            CONECTANDO MENSAJES AUTÉNTICOS CON DIVERSAS AUDIENCIAS
+          </p>
+          <h2 className="servicios__title" ref={titleRef}>SERVICIOS</h2>
+          <div className="servicios__line"></div>
         </div>
 
-        {/* Second row - 4 items */}
-        <div className="servicios__row servicios__row--second">
-          {services.slice(5, 9).map((service, index) => (
-            <div
-              key={service.id}
-              ref={el => servicesRef.current[index + 5] = el}
-              className="servicios__service"
-            >
-              <div className="servicios__icon-wrapper">
-                <img 
-                  src={service.icon} 
-                  alt={service.title} 
-                  className="servicios__icon"
-                />
+        <div className="servicios__grid">
+          <div className="servicios__row">
+            {services.map((service, index) => (
+              <div
+                key={service.id}
+                ref={el => servicesRef.current[index] = el}
+                className="servicios__service"
+              >
+                <div className="servicios__icon-wrapper">
+                  <img 
+                    src={service.icon} 
+                    alt={service.title} 
+                    className="servicios__icon"
+                  />
+                </div>
+                <h3 className="servicios__service-title">{service.title}</h3>
               </div>
-              <h3 className="servicios__service-title">{service.title}</h3>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
 };
 
 export default Servicios;

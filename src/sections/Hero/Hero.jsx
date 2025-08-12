@@ -1,19 +1,17 @@
 // src/sections/Hero/Hero.jsx
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import { useLanguage } from '../../contexts/LanguageContext';
-import { haloLogoBlanco } from '../../assets/images/logo';
-import { honorVideo } from '../../assets/videos';
+import { hypeLogoBlanco } from '../../assets/images/logo';
+import { HypeVideo } from '../../assets/videos';
 import './Hero.scss';
 
 const Hero = () => {
-  const { t } = useLanguage();
   const heroRef = useRef(null);
 
   useEffect(() => {
     const tl = gsap.timeline({ delay: 0.5 });
 
-    // Animate HALO logo
+    // Animate HYPE logo
     tl.fromTo('.hero__logo',
       { 
         opacity: 0,
@@ -45,7 +43,7 @@ const Hero = () => {
           loop
           playsInline
         >
-          <source src={honorVideo} type="video/mp4" />
+          <source src={HypeVideo} type="video/mp4" />
         </video>
         <div className="hero__overlay"></div>
       </div>
@@ -53,11 +51,11 @@ const Hero = () => {
       <div className="hero__content container">
         <div className="hero__text-container">
           <img 
-            src={haloLogoBlanco} 
-            alt="HALO" 
+            src={hypeLogoBlanco} 
+            alt="HYPE" 
             className="hero__logo"
           />
-          <p className="hero__subtitle">{t('hero.subtitle')}</p>
+          <p className="hero__subtitle">RELACIONES PÚBLICAS</p>
         </div>
       </div>
 
