@@ -51,8 +51,8 @@
 
   &__title {
     font-family: $font-primary;
-    font-size: clamp(3.5rem, 5vw, 5rem);
-    font-weight: map-get($visby-weights, 'regular');
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 350;
     line-height: 1.2;
     margin-bottom: 1rem;
     color: $black;
@@ -61,7 +61,7 @@
   &__subtitle {
     font-family: $font-primary;
     font-size: clamp(2rem, 3vw, 2.8rem);
-    font-weight: map-get($visby-weights, 'regular');
+    font-weight: 300;
     margin-bottom: 4rem;
     color: $black;
   }
@@ -91,7 +91,7 @@
     &::placeholder {
       color: $masala;
       opacity: 0.7;
-      font-weight: map-get($visby-weights, 'light');
+      font-weight: 300;
     }
 
     &:focus {
@@ -103,9 +103,9 @@
       }
     }
 
-    // Error state
-    &--error {
-      border-bottom-color: #ff4444;
+    // Filled state
+    &:not(:placeholder-shown) {
+      border-bottom-color: rgba($black, 0.7);
     }
   }
 
@@ -115,25 +115,48 @@
     font-family: inherit;
   }
 
-  &__error {
-    position: absolute;
-    bottom: -20px;
-    left: 0;
-    font-size: 1.2rem;
-    color: #ff4444;
+  &__status {
+    padding: 1.2rem 2rem;
+    border-radius: $radius-sm;
     font-family: $font-primary;
+    font-size: 1.4rem;
+    text-align: center;
+    animation: slideIn 0.3s ease-out;
+
+    &--success {
+      background-color: rgba(map-get($colors, 'hero'), 0.1);
+      color: darken(map-get($colors, 'hero'), 20%);
+      border: 1px solid rgba(map-get($colors, 'hero'), 0.3);
+    }
+
+    &--error {
+      background-color: rgba(map-get($colors, 'hype'), 0.1);
+      color: darken(map-get($colors, 'hype'), 10%);
+      border: 1px solid rgba(map-get($colors, 'hype'), 0.3);
+    }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   &__submit {
     align-self: flex-start;
-    padding: 1.8rem 4rem;
+    padding: 1.8rem 5rem;
     border: 2px solid $black;
-    border-radius: 50px;
+    border-radius: 35px;
     background: transparent;
     font-family: $font-primary;
     font-size: 1.6rem;
     font-weight: map-get($visby-weights, 'demi-bold');
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: $black;
     cursor: pointer;
@@ -141,9 +164,6 @@
     margin-top: 2rem;
     position: relative;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
 
     &::before {
       content: '';
@@ -158,57 +178,55 @@
       transition: width 0.6s, height 0.6s;
     }
 
+    &:hover:not(:disabled) {
+      color: $white;
+
+      &::before {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     span {
       position: relative;
       z-index: 1;
     }
+  }
 
-    &-icon {
-      position: relative;
-      z-index: 1;
-    }
-
-    &:hover {
-      color: $white;
-
-      &::before {
-        width: 400px;
-        height: 400px;
-      }
-    }
-
-    &:active {
-      transform: scale(0.98);
-    }
+  &__submit-icon {
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    fill: currentColor;
   }
 
   &__right {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
-    align-items: center; // Center align items
+    gap: 4rem;
+    align-items: center;
 
     @include responsive(tablet) {
       order: 1;
     }
   }
 
-  // Circular map container
   &__map-container {
-    width: 350px;
-    height: 350px;
+    position: relative;
+    width: 450px;
+    height: 450px;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    position: relative;
-    border: 3px solid rgba($chrome-white, 0.5);
-    transition: all $transition-base;
-
-    &:hover {
-      transform: scale(1.02);
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-    }
-
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    background-color: $white;
+    
     @include responsive(tablet) {
       width: 400px;
       height: 400px;
@@ -218,26 +236,110 @@
       width: 300px;
       height: 300px;
     }
+
+    // Decorative ring
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      border: 3px solid rgba($chrome-white, 0.3);
+      pointer-events: none;
+      z-index: 10;
+    }
   }
 
   &__map {
     width: 100%;
     height: 100%;
-    filter: grayscale(100%);
-    transition: filter $transition-base;
-
-    &:hover {
-      filter: grayscale(0%);
-    }
-
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    background: $white;
+    
     iframe {
-      width: 100%;
-      height: 100%;
-      // Scale the iframe to ensure full coverage of the circle
-      transform: scale(1.4);
+      width: 140%;
+      height: 1110%;
+      position: absolute;
+      top: 45%;
+      left: 48%;
+      transform: translate(-50%, -50%);
+      filter: grayscale(20%);
+      transition: filter $transition-base;
+      // Permitir interacción con el mapa
+      pointer-events: auto;
+      
+      &:hover {
+        filter: grayscale(0%);
+      }
+    }
+    
+    // Overlay solo para el logo de Google - esquina inferior izquierda
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 10px;
+      left: 20px;
+      width: 90px;
+      height: 25px;
+      background: $white;
+      z-index: 2;
+      pointer-events: none;
+      border-radius: 5px;
     }
   }
+  
+  // Overlay para cubrir texto "Centrar" en la parte superior
+  &__map-top-overlay {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 25px;
+    background: $white;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 5px;
+  }
 
+  // Overlay para cubrir controles del lado derecho
+  &__map-right-overlay {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 60px;
+    background: $white;
+    z-index: 2;
+    pointer-events: none;
+    border-radius: 5px;
+  }
+  
+  // Overlay clickeable
+  &__map-click-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    z-index: 5;
+    cursor: pointer;
+  }
+  // Overlay adicional para cubrir el borde derecho
+  &__map-overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 15px;
+    height: 100%;
+    background: $white;
+    z-index: 2;
+    pointer-events: none;
+  }
+  
   &__info {
     display: flex;
     flex-direction: column;
@@ -257,46 +359,103 @@
   }
 
   &__address {
-    background: none;
-    border: none;
     font-family: $font-primary;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     line-height: 1.8;
     color: $masala;
+    margin-bottom: 3rem;
+    font-weight: map-get($visby-weights, 'light');
+    background: none;
+    border: none;
     cursor: pointer;
-    transition: color $transition-base;
+    transition: all $transition-base;
+    position: relative;
+    display: block;
+    text-align: center;
+    width: 100%;
     padding: 0;
+
+    // Underline effect on hover
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 1px;
+      background-color: $black;
+      transition: width $transition-base;
+    }
 
     &:hover {
       color: $black;
+
+      &::after {
+        width: 80%;
+      }
     }
+
+    &:focus {
+      outline: 2px solid map-get($colors, 'hope');
+      outline-offset: 5px;
+      border-radius: 5px;
+    }
+  }
+
+  &__error {
+    font-family: $font-primary;
+    font-size: 1.2rem;
+    color: map-get($colors, 'hype');
+    margin-top: 0.5rem;
+    display: block;
   }
 
   &__social {
     display: flex;
+    justify-content: center;
     gap: 2rem;
-    margin-top: 1rem;
 
     a {
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 2px solid $chrome-white;
-      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      @include flex-center;
+      background-color: $black;
+      border-radius: $radius-full;
       transition: all $transition-base;
+      position: relative;
+      overflow: hidden;
 
-      svg {
-        width: 20px;
-        height: 20px;
-        fill: $black;
-        transition: fill $transition-base;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background-color: map-get($colors, 'hope');
+        transform: translate(-50%, -50%);
+        transition: width 0.4s, height 0.4s;
+        z-index: 0;
       }
 
       &:hover {
-        border-color: $black;
-        transform: translateY(-3px);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+
+        &::before {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      svg {
+        width: 22px;
+        height: 22px;
+        fill: $white;
+        position: relative;
+        z-index: 1;
       }
     }
   }
@@ -304,21 +463,34 @@
   @include responsive(mobile) {
     padding: 8rem 0 4rem;
 
-    &__content {
-      padding: 0 2rem;
-    }
-
     &__title {
-      font-size: clamp(3rem, 4vw, 4rem);
+      font-size: 3rem;
     }
 
     &__subtitle {
-      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      font-size: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    &__form {
+      gap: 2rem;
     }
 
     &__submit {
-      width: 100%;
-      justify-content: center;
+      padding: 1.5rem 4rem;
+      font-size: 1.4rem;
+    }
+
+    &__social {
+      a {
+        width: 40px;
+        height: 40px;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
     }
   }
 }

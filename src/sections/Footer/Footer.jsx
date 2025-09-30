@@ -2,80 +2,82 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+//import { useLanguage } from '../../contexts/LanguageContext';
 import { hgroupNegro } from '../../assets/images/logo';
 import './Footer.scss';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Footer = () => {
+  //const { t } = useLanguage();
   const footerRef = useRef(null);
-  const formRef = useRef(null);
   const mapRef = useRef(null);
+  const formRef = useRef(null);
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
     message: ''
   });
+  
   const [errors, setErrors] = useState({});
 
-  // WhatsApp number for H Group
-  const whatsappNumber = '525619933412'; // Replace with actual H Group WhatsApp
-  const googleMapsUrl = 'https://goo.gl/maps/YOUR_GOOGLE_MAPS_LINK'; // Replace with actual link
+  // WhatsApp number for H Group (Mexico format)
+  const whatsappNumber = '+5215619933412';
+
+  // Google Maps URL for the location
+  const googleMapsUrl = "https://www.google.com/maps/place/Blvd.+Palmas+Hills+1,+Valle+de+las+Palmas,+52787+Naucalpan+de+Ju%C3%A1rez,+M%C3%A9x./@19.3925333,-99.2809451,17z/data=!3m1!4b1!4m6!3m5!1s0x85d206cd0ecf99d7:0x5cf8cf0df97e7401!8m2!3d19.3925333!4d-99.2809451!16s%2Fg%2F11xh2zvqk1";
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Footer animations
-      gsap.fromTo('.footer__title',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            trigger: '.footer__title',
-            start: 'top 85%',
-          }
-        }
-      );
-
-      gsap.fromTo('.footer__subtitle',
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          delay: 0.1,
-          scrollTrigger: {
-            trigger: '.footer__subtitle',
-            start: 'top 85%',
-          }
-        }
-      );
-
+      // Animate form elements
       gsap.fromTo('.footer__form-group',
-        { opacity: 0, y: 20 },
+        { opacity: 0, x: -50 },
+        {
+          opacity: 1,
+          x: 0,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: '.footer__form',
+            start: 'top 80%'
+          }
+        }
+      );
+
+      // Animate map with circular reveal
+      gsap.fromTo('.footer__map-container',
+        { 
+          scale: 0,
+          opacity: 0
+        },
+        {
+          scale: 1,
+          opacity: 1,
+          duration: 1.5,
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: '.footer__map-container',
+            start: 'top 80%'
+          }
+        }
+      );
+
+      // Animate info section
+      gsap.fromTo('.footer__info > *',
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
-          stagger: 0.1,
+          stagger: 0.2,
+          delay: 0.5,
+          ease: 'power3.out',
           scrollTrigger: {
-            trigger: '.footer__form',
-            start: 'top 85%',
-          }
-        }
-      );
-
-      gsap.fromTo('.footer__map-container',
-        { opacity: 0, scale: 0.95 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          scrollTrigger: {
-            trigger: '.footer__map-container',
-            start: 'top 85%',
+            trigger: '.footer__info',
+            start: 'top 80%'
           }
         }
       );
@@ -91,12 +93,13 @@ const Footer = () => {
       [name]: value
     }));
     
-    // Clear error when user starts typing
+    // Clear error for this field when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
         [name]: ''
       }));
+      
     }
   };
 
@@ -167,18 +170,33 @@ _Enviado desde el formulario de contacto de HYPE`;
     // Create WhatsApp URL
     const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
     
-    // Open WhatsApp in new tab
-    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
-    
-    // Reset form
-    setTimeout(() => {
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        message: ''
-      });
-    }, 1000);
+    // Success animation
+    gsap.to(formRef.current, {
+      scale: 0.98,
+      duration: 0.2,
+      yoyo: true,
+      repeat: 1,
+      onComplete: () => {
+        // Open WhatsApp in new tab
+        window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        
+        // Optional: Reset form after redirect
+        setTimeout(() => {
+          setFormData({
+            name: '',
+            email: '',
+            phone: '',
+            message: ''
+          });
+          
+          // Show success feedback
+          gsap.fromTo('.footer__form',
+            { opacity: 0.5 },
+            { opacity: 1, duration: 0.5 }
+          );
+        }, 1000);
+      }
+    });
   };
 
   const handleAddressClick = () => {
@@ -254,19 +272,35 @@ _Enviado desde el formulario de contacto de HYPE`;
             </form>
           </div>
 
-          <div className="footer__right">
-            <div className="footer__map-container">
+       <div className="footer__right">
+            <div 
+              className="footer__map-container"
+              onClick={handleAddressClick}
+              role="button"
+              tabIndex={0}
+              onKeyPress={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  handleAddressClick();
+                }
+              }}
+              aria-label="Ver ubicación en Google Maps"
+            >
               <div className="footer__map" ref={mapRef}>
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3762.1397!2d-99.2086!3d19.4492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d20200b0000000%3A0x0!2sBlvd.%20Palmas%20Hills%201%2C%20Piso%2021!5e0!3m2!1ses!2smx!4v1647891234567!5m2!1ses!2smx"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen=""
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="H Group Location"
-                ></iframe>
+                <div className="footer__map-inner">
+                  <iframe
+                    src="https://maps.google.com/maps?q=Blvd.+Palmas+Hills+1,+Valle+de+las+Palmas,+52787+Naucalpan+de+Juarez&t=&z=16&ie=UTF8&iwloc=B&output=embed&disableDefaultUI=true"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="H Group Location"
+                    frameBorder="0"
+                    tabIndex={-1}
+                  ></iframe>
+                </div>
+                <div className="footer__map-click-overlay"></div>
               </div>
             </div>
 
@@ -284,6 +318,7 @@ _Enviado desde el formulario de contacto de HYPE`;
                 de Juárez, Méx.
               </button>
               <div className="footer__social">
+            
                 <a 
                   href="https://www.instagram.com/hgroupp_/" 
                   target="_blank" 

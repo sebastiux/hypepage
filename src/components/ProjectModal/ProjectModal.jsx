@@ -117,7 +117,7 @@ const ProjectModal = ({ project, isOpen, onClose, isSimple = true }) => {
           {/* Left side - Image Gallery */}
           <div 
             className="project-modal__left"
-            style={{ backgroundColor: project.brandColor || '#E8D9EC' }}
+            style={{ backgroundColor: '#ffffffff' }}
           >
             <div 
               className={`project-modal__images pattern-${distribution.pattern}`}

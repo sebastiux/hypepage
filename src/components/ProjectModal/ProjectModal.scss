@@ -265,7 +265,7 @@
 
     p {
       margin: 0;
-      font-weight: map-get($visby-weights, 'regular');
+      font-weight: 300;
     }
 
     @include responsive(tablet) {

@@ -24,7 +24,8 @@ const Navbar = () => {
   };
 
   const handleLogoClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+   //window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.location.href = 'https://hgroup.consulting/';
   };
 
   return (
@@ -43,9 +44,6 @@ const Navbar = () => {
           </li>
           <li className="navbar__menu-item">
             <a onClick={() => scrollToSection('proyectos')}>PROYECTOS</a>
-          </li>
-          <li className="navbar__menu-item">
-            <a onClick={() => scrollToSection('colaboraciones')}>COLABORACIONES</a>
           </li>
           <li className="navbar__menu-item">
             <a onClick={() => scrollToSection('contacto')}>CONTACTO</a>

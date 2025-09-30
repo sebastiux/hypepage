@@ -14,14 +14,16 @@
 
   &__title {
     font-family: $font-primary;
-    font-size: clamp(3rem, 5vw, 4.5rem);
-    font-weight: map-get($visby-weights, 'regular');
+    font-size: clamp(3rem, 5vw, 4rem);
+    font-weight: 350;
     letter-spacing: 0.15em;
     margin-bottom: 4rem;
     color: $black;
     padding: 1.5rem 4rem;
+    /*
     border: 2px solid $black;
     border-radius: 50px;
+    */
     display: inline-block;
     text-transform: uppercase;
   }
